@@ -1,10 +1,19 @@
 import psycopg2
 
 
-def getConnection(host, port, user, password, databse):
-    conn = psycopg2.connect(host=host, port=port, user=user, password=password, database=databse)
-    print("Operation[Connection Create] successfully")
-    return conn
+def getConnection(host, port, user, password, database):
+    """
+    Create a new database connection.
+    :param host: database host address (defaults to UNIX socket if not provided)
+    :param port: connection port number (defaults to 5432 if not provided)
+    :param user: user name used to authenticate
+    :param password: password used to authenticate
+    :param database: the database name (only as keyword argument)
+    :return: connection
+    """
+    connection = psycopg2.connect(host=host, port=port, user=user, password=password, database=database)
+    print("Create a new database connection successfully")
+    return connection
 
 
 def getRows(connection, sql):
@@ -12,9 +21,7 @@ def getRows(connection, sql):
 
     cur.execute(sql)
     rows = cur.fetchall()
-    print("Operation[SELECT] done successfully")
 
     connection.close()
-    print("Operation[Connection Close] done successfully")
-
+    print("Close the current database connection successfully")
     return rows
