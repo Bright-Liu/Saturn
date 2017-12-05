@@ -1,22 +1,20 @@
 import psycopg2
 
 
-def getConnection():
-    conn = psycopg2.connect(database="windpowerdb", user="gpadmin", password="gpadmin", host="10.0.2.23",
-                            port="1809")
-
-    print("Opened database successfully")
-
+def getConnection(host, port, user, password, databse):
+    conn = psycopg2.connect(host=host, port=port, user=user, password=password, database=databse)
+    print("Operation[Connection Create] successfully")
     return conn
 
 
-def getRows(sql):
-    conn = getConnection()
+def getRows(connection, sql):
+    cur = connection.cursor()
 
-    cur = conn.cursor()
     cur.execute(sql)
     rows = cur.fetchall()
+    print("Operation[SELECT] done successfully")
 
-    conn.close
+    connection.close()
+    print("Operation[Connection Close] done successfully")
 
     return rows
