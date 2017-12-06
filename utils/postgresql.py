@@ -1,3 +1,14 @@
+#!/usr/local/bin/python3
+# encoding: utf-8
+
+"""
+@version: 1.0.0
+@author: bright
+@contact: bright.liu2012@gmail.com
+@file: postgresql.py
+@time: 2017/12/5 09:30
+"""
+
 import psycopg2
 
 
